@@ -194,6 +194,7 @@ pixbuf_pixdata_SOURCES =		\
 	resources.c			\
 	$(NULL)
 
+if !CROSS_COMPILING
 BUILT_SOURCES += resources.h resources.c
 DISTCLEANFILES += 			\
 	resources.h resources.c 	\
@@ -210,5 +211,6 @@ resources.h: resources.gresource.xml
 
 resources.c: resources.gresource.xml
 	$(AM_V_GEN) GDK_PIXBUF_MODULE_FILE=$(top_builddir)/gdk-pixbuf/loaders.cache GDK_PIXBUF_PIXDATA=$(top_builddir)/gdk-pixbuf/gdk-pixbuf-pixdata $(GLIB_COMPILE_RESOURCES) $(srcdir)/resources.gresource.xml --target=$@ --sourcedir=$(srcdir) --generate-source
+endif # !CROSS_COMPILING
 
 -include $(top_srcdir)/git.mk
